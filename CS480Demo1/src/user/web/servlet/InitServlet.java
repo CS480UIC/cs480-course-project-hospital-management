@@ -54,6 +54,7 @@ public class InitServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		request.getRequestDispatcher("/jsps/main.jsp").forward(request, response);
 		
 		
 	}

@@ -89,7 +89,7 @@ public class InitializeDao {
 		    statement.executeUpdate("DROP TABLE IF EXISTS Patient");
 
 		    String sqlstmt = "CREATE TABLE Patient" +
-	                  "(patient_id INTEGER not NULL, " +
+	                  "(patient_id INTEGER not NULL AUTO_INCREMENT, " +
 	                  " first VARCHAR(255), " + 
 	                  " last VARCHAR(255), " + 
 	                  " age INTEGER, " + 
@@ -105,7 +105,7 @@ public class InitializeDao {
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Physician");
 
 		 	sqlstmt = "CREATE TABLE Physician" +
-		 	           "(physician_id INTEGER not NULL, " +
+		 	           "(physician_id INTEGER not NULL AUTO_INCREMENT, " +
 		 	           " first VARCHAR(255), " + 
 		 	           " last VARCHAR(255), " + 
 		 	           " position VARCHAR(255), " + 
@@ -120,7 +120,7 @@ public class InitializeDao {
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Nurse");
 
 		 	sqlstmt = "CREATE TABLE Nurse" +
-		 	           "(nurse_id INTEGER not NULL, " +
+		 	           "(nurse_id INTEGER not NULL AUTO_INCREMENT, " +
 		 	           " first VARCHAR(255), " + 
 		 	           " last VARCHAR(255), " + 
 		 	           " position VARCHAR(255), " +
@@ -133,7 +133,7 @@ public class InitializeDao {
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Department");
 
 		 	sqlstmt = "CREATE TABLE Department" +
-		 	           "(department_id INTEGER not NULL, " +
+		 	           "(department_id INTEGER not NULL AUTO_INCREMENT, " +
 		 	           " name VARCHAR(255), " + 
 		 	           " PRIMARY KEY ( department_id ))"; 
 		 		    
@@ -144,7 +144,7 @@ public class InitializeDao {
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Appointment");
 
 		 	sqlstmt = "CREATE TABLE Appointment" +
-		 	           "(app_id INTEGER not NULL, " +
+		 	           "(app_id INTEGER not NULL AUTO_INCREMENT, " +
 		 	           " physician_id INTEGER not NULL, " +
 		 	           " nurse_id INTEGER not NULL, " +
 		 	           " app_date DATE not NULL, " +
@@ -166,148 +166,148 @@ public class InitializeDao {
 		 	
 		 	
 		 	
-		 	/* Insert Appointment */
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Appointment(app_id, physician_id, nurse_id, app_date) values (?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 01);
-		    preparedStatement.setInt(2, 01);
-		    preparedStatement.setInt(3, 01);
-			preparedStatement.setString(4, "2020-11-11");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Appointment(app_id, physician_id, nurse_id, app_date) values (?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 02);
-		    preparedStatement.setInt(2, 01);
-		    preparedStatement.setInt(3, 01);
-			preparedStatement.setString(4, "2020-08-08");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION
-
-		    
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Appointment(app_id, physician_id, nurse_id, app_date) values (?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 03);
-		    preparedStatement.setInt(2, 01);
-		    preparedStatement.setInt(3, 01);
-			preparedStatement.setString(4, "2020-01-09");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION
-		 	
-		 	
-		 	
-		 	/* Insert Department */
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Department(department_id, name) values (?, ?)");
-		    preparedStatement.setInt(1, 01);
-			preparedStatement.setString(2, "General");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Department(department_id, name) values (?, ?)");
-		    preparedStatement.setInt(1, 03);
-			preparedStatement.setString(2, "Cardio");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Department(department_id, name) values (?, ?)");
-		    preparedStatement.setInt(1, 02);
-			preparedStatement.setString(2, "Plastics");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-			
-			
-			
-		 	/* Insert Nurse */
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Nurse(nurse_id, first, last, position) values (?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 01);
-			preparedStatement.setString(2, "Shair");
-			preparedStatement.setString(3, "Nades");
-			preparedStatement.setString(4, "Assistant Nurse");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Nurse(nurse_id, first, last, position) values (?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 03);
-			preparedStatement.setString(2, "Missael");
-			preparedStatement.setString(3, "Lopez");
-			preparedStatement.setString(4, "Head Nurse");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    
-		    preparedStatement = connect
-		    		.prepareStatement("insert into Nurse(nurse_id, first, last, position) values (?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 02);
-			preparedStatement.setString(2, "Amy");
-			preparedStatement.setString(3, "Low");
-			preparedStatement.setString(4, "Nurse");
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-			
-			
-			
-		 	/* Insert Physician */
-		    preparedStatement = connect
-		    		.prepareStatement("insert into  Physician(physician_id, first, last, position, department_id) values (?, ?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 01);
-			preparedStatement.setString(2, "Maria");
-			preparedStatement.setString(3, "Gates");
-			preparedStatement.setString(4, "General Surgeon");
-			preparedStatement.setInt(5, 02);
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    preparedStatement = connect
-		    		.prepareStatement("insert into  Physician(physician_id, first, last, position, department_id) values (?, ?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 03);
-			preparedStatement.setString(2, "John");
-			preparedStatement.setString(3, "Garcia");
-			preparedStatement.setString(4, "General Doctor");
-			preparedStatement.setInt(5, 22);
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		    
-		    preparedStatement = connect
-		    		.prepareStatement("insert into  Physician(physician_id, first, last, position, department_id) values (?, ?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 02);
-			preparedStatement.setString(2, "Jesus");
-			preparedStatement.setString(3, "Low");
-			preparedStatement.setString(4, "Neurosurgeon");
-			preparedStatement.setInt(5, 01);
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-
-		 	
-		 	/* Insert Patients */
-		    
-		    preparedStatement = connect
-		    		.prepareStatement("insert into  Patient(patient_id, first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?, ?)");
-		    preparedStatement.setInt(1, 01);
-			preparedStatement.setString(2, "Cynthia");
-			preparedStatement.setString(3, "Lopez");
-			preparedStatement.setInt(4, 23);
-			preparedStatement.setString(5, "Female");
-			preparedStatement.setString(6, "123 N. Wabash");
-			preparedStatement.setInt(7, 555555555);
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-			      
-			preparedStatement = connect
-		    		.prepareStatement("insert into  Patient(patient_id, first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?, ?)");
-			preparedStatement.setInt(1, 02);
-			preparedStatement.setString(2, "Jane");
-			preparedStatement.setString(3, "Doe");
-			preparedStatement.setInt(4, 15);
-			preparedStatement.setString(5, "NA");
-			preparedStatement.setString(6, "123 Elmo st.");
-			preparedStatement.setInt(7, 123456789);
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
-			
-			preparedStatement = connect
-		    		.prepareStatement("insert into  Patient(patient_id, first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?, ?)");
-			preparedStatement.setInt(1, 03);
-			preparedStatement.setString(2, "John");
-			preparedStatement.setString(3, "Doe");
-			preparedStatement.setInt(4, 11);
-			preparedStatement.setString(5, "Male");
-			preparedStatement.setString(6, "123 N. Wabash");
-			preparedStatement.setInt(7, 123456789);
-			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//		 	/* Insert Appointment */
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Appointment(app_id, physician_id, nurse_id, app_date) values (?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 01);
+//		    preparedStatement.setInt(2, 01);
+//		    preparedStatement.setInt(3, 01);
+//			preparedStatement.setString(4, "2020-11-11");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Appointment(app_id, physician_id, nurse_id, app_date) values (?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 02);
+//		    preparedStatement.setInt(2, 01);
+//		    preparedStatement.setInt(3, 01);
+//			preparedStatement.setString(4, "2020-08-08");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION
+//
+//		    
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Appointment(app_id, physician_id, nurse_id, app_date) values (?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 03);
+//		    preparedStatement.setInt(2, 01);
+//		    preparedStatement.setInt(3, 01);
+//			preparedStatement.setString(4, "2020-01-09");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION
+//		 	
+//		 	
+//		 	
+//		 	/* Insert Department */
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Department(department_id, name) values (?, ?)");
+//		    preparedStatement.setInt(1, 01);
+//			preparedStatement.setString(2, "General");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Department(department_id, name) values (?, ?)");
+//		    preparedStatement.setInt(1, 03);
+//			preparedStatement.setString(2, "Cardio");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Department(department_id, name) values (?, ?)");
+//		    preparedStatement.setInt(1, 02);
+//			preparedStatement.setString(2, "Plastics");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//			
+//			
+//			
+//		 	/* Insert Nurse */
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Nurse(nurse_id, first, last, position) values (?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 01);
+//			preparedStatement.setString(2, "Shair");
+//			preparedStatement.setString(3, "Nades");
+//			preparedStatement.setString(4, "Assistant Nurse");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Nurse(nurse_id, first, last, position) values (?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 03);
+//			preparedStatement.setString(2, "Missael");
+//			preparedStatement.setString(3, "Lopez");
+//			preparedStatement.setString(4, "Head Nurse");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into Nurse(nurse_id, first, last, position) values (?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 02);
+//			preparedStatement.setString(2, "Amy");
+//			preparedStatement.setString(3, "Low");
+//			preparedStatement.setString(4, "Nurse");
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//			
+//			
+//			
+//		 	/* Insert Physician */
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into  Physician(physician_id, first, last, position, department_id) values (?, ?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 01);
+//			preparedStatement.setString(2, "Maria");
+//			preparedStatement.setString(3, "Gates");
+//			preparedStatement.setString(4, "General Surgeon");
+//			preparedStatement.setInt(5, 02);
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into  Physician(physician_id, first, last, position, department_id) values (?, ?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 03);
+//			preparedStatement.setString(2, "John");
+//			preparedStatement.setString(3, "Garcia");
+//			preparedStatement.setString(4, "General Doctor");
+//			preparedStatement.setInt(5, 22);
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		    
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into  Physician(physician_id, first, last, position, department_id) values (?, ?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 02);
+//			preparedStatement.setString(2, "Jesus");
+//			preparedStatement.setString(3, "Low");
+//			preparedStatement.setString(4, "Neurosurgeon");
+//			preparedStatement.setInt(5, 01);
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//
+//		 	
+//		 	/* Insert Patients */
+//		    
+//		    preparedStatement = connect
+//		    		.prepareStatement("insert into  Patient(patient_id, first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?, ?)");
+//		    preparedStatement.setInt(1, 01);
+//			preparedStatement.setString(2, "Cynthia");
+//			preparedStatement.setString(3, "Lopez");
+//			preparedStatement.setInt(4, 23);
+//			preparedStatement.setString(5, "Female");
+//			preparedStatement.setString(6, "123 N. Wabash");
+//			preparedStatement.setInt(7, 555555555);
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//			      
+//			preparedStatement = connect
+//		    		.prepareStatement("insert into  Patient(patient_id, first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?, ?)");
+//			preparedStatement.setInt(1, 02);
+//			preparedStatement.setString(2, "Jane");
+//			preparedStatement.setString(3, "Doe");
+//			preparedStatement.setInt(4, 15);
+//			preparedStatement.setString(5, "NA");
+//			preparedStatement.setString(6, "123 Elmo st.");
+//			preparedStatement.setInt(7, 123456789);
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
+//			
+//			preparedStatement = connect
+//		    		.prepareStatement("insert into  Patient(patient_id, first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?, ?)");
+//			preparedStatement.setInt(1, 03);
+//			preparedStatement.setString(2, "John");
+//			preparedStatement.setString(3, "Doe");
+//			preparedStatement.setInt(4, 11);
+//			preparedStatement.setString(5, "Male");
+//			preparedStatement.setString(6, "123 N. Wabash");
+//			preparedStatement.setInt(7, 123456789);
+//			preparedStatement.executeUpdate(); // RUN A TRANSACTION	
 			
 		    
 		} catch(SQLException e) {

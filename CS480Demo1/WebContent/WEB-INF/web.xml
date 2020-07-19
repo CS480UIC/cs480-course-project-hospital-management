@@ -4,6 +4,36 @@
   <display-name>CSC4710 Demo</display-name>
   <servlet>
     <description></description>
+    <display-name>physicianServlet</display-name>
+    <servlet-name>physicianServlet</servlet-name>
+    <servlet-class>user.web.servlet.physicianServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>physicianServlet</servlet-name>
+    <url-pattern>/physicianServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>nurseServlet</display-name>
+    <servlet-name>nurseServlet</servlet-name>
+    <servlet-class>user.web.servlet.nurseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>nurseServlet</servlet-name>
+    <url-pattern>/nurseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>patientServlet</display-name>
+    <servlet-name>patientServlet</servlet-name>
+    <servlet-class>user.web.servlet.patientServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>patientServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>InitServlet</display-name>
     <servlet-name>InitServlet</servlet-name>
     <servlet-class>user.web.servlet.InitServlet</servlet-class>
