@@ -1,0 +1,31 @@
+﻿EmployeeID,first,last,position,ssn
+1,John,Dorian,Internist,111
+2,Elliot,Redd,Attending Physician,222
+3,Missael,Garcia,Surgical Attending Physician,333
+4,Cynthia,Lopez,Senior Attending Physician,444
+5,Molly,Clock,Head Chief of Medicine,555
+6,Keith,John,Attending Physician,666
+7,Todd,Quinn,Psychiatrist,777
+8,Christopher ,Kelso,Chief of Surgery,888
+9,Bob,Down,Internist,999
+10,Xochitl,Castel,Internist,1111
+11,Jessica,Dawn,Psychologist,2222
+12,Brian,Karmo,Psychologist,3333
+13,Brian,Xuya,MD Resident ,4444
+14,Janet,Sosa,Senior Attending Psychiatrist,5555
+15,Elia,Garcia,Attending Physician,6666
+16,Richard,Lopez,MD Resident ,7777
+17,Rich,Hudson,Physician,8888
+18,Daniel,Guzman,Surgical Attending Physician,9999
+19,William,Goodman,Internist,11111
+20,Sarah,King,Surgical Attending Physician,22222
+21,Andrew,McConnel,MD Resident ,33333
+22,King,William,Psychiatrist,44444
+23,Charles,Chuck,Physician,55555
+24,Alyssa,Pineda,Surgical Attending Physician,66666
+25,Elizabeth,Wen,MD Resident ,77777
+26,Michael,Chen,Attending Radiologist,88888
+27,Jimmy,Carter,Radiologist,99999
+28,Joseph,Cain,Pharmacist,111111
+29,Star,Dew,Senior Pharmacist,222222
+30,Karen,Doe,Attending Pharmacist,333333

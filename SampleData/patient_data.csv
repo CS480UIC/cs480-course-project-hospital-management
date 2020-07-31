@@ -1,0 +1,11 @@
+SSN,"""first""","""last""",age,"""gender""","""address""","""phone""",doctor
+101,"""Dennis""","""Andrew""",21,"""MALE""","""23 W State""","""555-5555""",2
+102,"""Miguel""","""Herrera""",24,"""MALE""","""201 Bbq Street""","""555-5122""",23
+103,"""Kali""","""Uchis""",48,"""FEMALE""","""111 W Illinois ""","""603-7777""",14
+104,"""Brent ""","""Napp""",33,"""MALE""","""351 W Pershing Rd""","""339-3434""",15
+105,"""Trinity""","""James""",32,"""FEMALE""","""363 S Wood St""","""233-5000""",2
+106,"""Jorja""","""Smith""",12,"""FEMALE""","""2121 S Keedzie Ave""","""234-1212""",7
+107,"""Rody""","""Rich""",15,"""MALE""","""454 W Madison""","""916-4444""",13
+108,"""Joan""","""Black""",25,"""FEMALE""","""667 N Madi Ave""","""888-2222""",18
+109,"""Carmela""","""Emmanuel""",26,"""FEMALE""","""889 E Cancun""","""800-8000""",22
+110,"""Bobby""","""Aguilar""",38,"""MALE""","""555 S King St""","""812-3333""",1
