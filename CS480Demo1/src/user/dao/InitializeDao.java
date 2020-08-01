@@ -70,7 +70,7 @@ public class InitializeDao {
 		PreparedStatement preparedStatement;
 		
 		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		final String DB_URL = "jdbc:mysql://localhost/" + DB;
+		final String DB_URL = "jdbc:mysql://localhost/" + DB + "?serverTimezone=America/Chicago";
 
 		//  Database credentials
 		final String USER = "root";
@@ -84,35 +84,35 @@ public class InitializeDao {
 			//Open a connection
 		    Connection connect = DriverManager.getConnection(DB_URL, USER, PASS);
 		    
+		    // Second table: Physician
+		 	statement = connect.createStatement();
+		 	statement.executeUpdate("DROP TABLE IF EXISTS Physician");
+
+		 	String sqlstmt = "CREATE TABLE Physician" +
+		 	           "(EmployeeID INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+		 	           " first TEXT NOT NULL, " + 
+		 	           " last TEXT NOT NULL, " + 
+		 	           " position TEXT NOT NULL, " + 
+		 	           " ssn INTEGER NOT NULL )"; 
+		 		    
+		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION 
+		    
 		    // First table: Patient
 			statement = connect.createStatement();
 		    statement.executeUpdate("DROP TABLE IF EXISTS Patient");
 
-		    String sqlstmt = "CREATE TABLE Patient" +
-	                  "(patient_id INTEGER not NULL AUTO_INCREMENT, " +
+		    sqlstmt = "CREATE TABLE Patient" +
+	                  "(SSN INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
 	                  " first VARCHAR(255), " + 
 	                  " last VARCHAR(255), " + 
 	                  " age INTEGER, " + 
 	                  " gender VARCHAR(255), " + 
 	                  " address VARCHAR(255), " +
-	                  " phone INTEGER(10), " +
-	                  " PRIMARY KEY ( patient_id ))"; 
+	                  " phone TEXT NOT NULL, " +
+	                  " physician INTEGER NOT NULL, " + 
+	                  " CONSTRAINT k_Physician_EmployeeID FOREIGN KEY (physician) REFERENCES Physician(EmployeeID) ON DELETE CASCADE)"; 
 		    
 		    statement.executeUpdate(sqlstmt);  // RUN THE 1ST TRANSACTION 
-		    
-		    // Second table: Physician
-		 	statement = connect.createStatement();
-		 	statement.executeUpdate("DROP TABLE IF EXISTS Physician");
-
-		 	sqlstmt = "CREATE TABLE Physician" +
-		 	           "(physician_id INTEGER not NULL AUTO_INCREMENT, " +
-		 	           " first VARCHAR(255), " + 
-		 	           " last VARCHAR(255), " + 
-		 	           " position VARCHAR(255), " + 
-		 	           " department_id INTEGER, " +
-		 	           " PRIMARY KEY ( physician_id ))"; 
-		 		    
-		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION 
 
 		    
 		 	// Third table: Nurse
@@ -120,22 +120,22 @@ public class InitializeDao {
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Nurse");
 
 		 	sqlstmt = "CREATE TABLE Nurse" +
-		 	           "(nurse_id INTEGER not NULL AUTO_INCREMENT, " +
+		 	           "(EmployeeID INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
 		 	           " first VARCHAR(255), " + 
 		 	           " last VARCHAR(255), " + 
-		 	           " position VARCHAR(255), " +
-		 	           " PRIMARY KEY ( nurse_id ))"; 
+		 	           " position VARCHAR(255))"; 
 		 		    
 		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION 
-		 	
+//		 	
 		 	// fourth table: department
 		 	statement = connect.createStatement();
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Department");
 
 		 	sqlstmt = "CREATE TABLE Department" +
-		 	           "(department_id INTEGER not NULL AUTO_INCREMENT, " +
-		 	           " name VARCHAR(255), " + 
-		 	           " PRIMARY KEY ( department_id ))"; 
+		 	           "(DepartmentID INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+		 	           " name TEXT NOT NULL, " + 
+		 	           " Head INTEGER NOT NULL, " +
+		 	           " CONSTRAINT fk_Physician_EmployeeID FOREIGN KEY (Head) REFERENCES Physician(EmployeeID) ON DELETE CASCADE)"; 
 		 		    
 		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION 
 		    
@@ -144,11 +144,15 @@ public class InitializeDao {
 		 	statement.executeUpdate("DROP TABLE IF EXISTS Appointment");
 
 		 	sqlstmt = "CREATE TABLE Appointment" +
-		 	           "(app_id INTEGER not NULL AUTO_INCREMENT, " +
-		 	           " physician_id INTEGER not NULL, " +
-		 	           " nurse_id INTEGER not NULL, " +
-		 	           " app_date DATE not NULL, " +
-		 	           " PRIMARY KEY ( app_id ))"; 
+		 	           "(app_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+		 	           " Patient INTEGER NOT NULL, " + 
+		 	           " CONSTRAINT fk_Patient_SSN FOREIGN KEY (PATIENT) REFERENCES Patient(SSN), " +
+		 	           " NurseAssist INTEGER, " + 
+		 	           " CONSTRAINT fk_Nurse_EmployeeID FOREIGN KEY (NurseAssist) REFERENCES Nurse(EmployeeID) ON DELETE CASCADE, " +
+		 	           " Physician INTEGER NOT NULL, " + 
+		 	           " CONSTRAINT Physician_EmployeeID FOREIGN KEY (Physician) REFERENCES Physician(EmployeeID) ON DELETE CASCADE, " +
+		 	           " Start DATETIME NOT NULL, " + 
+		 	           " End DATETIME NOT NULL)"; 
 		 		    
 		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION 
 		    
@@ -164,7 +168,20 @@ public class InitializeDao {
 		 		    
 		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION 
 		 	
-		 	
+		 	// last table: user
+		 	statement = connect.createStatement();
+		 	statement.executeUpdate("DROP TABLE IF EXISTS Works_with");
+
+		 	sqlstmt = "CREATE TABLE Works_with" +
+		 	           "(Physician INTEGER NOT NULL, " +
+		 	           " CONSTRAINT fk_Phys_EmployeeID FOREIGN KEY (Physician) REFERENCES Physician(EmployeeID) ON DELETE CASCADE, " +
+		 	           " Department INTEGER NOT NULL, " +
+		 	           " CONSTRAINT fk_Department_DepartmentID FOREIGN KEY (Department) REFERENCES Department(DepartmentID) ON DELETE CASCADE, " +
+		 	           " PRIMARY KEY(Physician, Department))"; 
+		 		    
+		 	statement.executeUpdate(sqlstmt);  // RUN THE 2ND TRANSACTION
+//		 	
+//		 	
 		 	
 //		 	/* Insert Appointment */
 //		    preparedStatement = connect

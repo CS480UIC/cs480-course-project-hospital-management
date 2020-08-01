@@ -13,6 +13,8 @@
             <a href="${pageContext.request.contextPath}/nurseServlet?nursing=1">Add New Nurse</a>
             &nbsp;&nbsp;&nbsp;
             <a href="${pageContext.request.contextPath}/nurseServlet?nursing=6">List All Nurse</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/jsps/main.jsp">Home</a>
              
         </h2>
     </center>

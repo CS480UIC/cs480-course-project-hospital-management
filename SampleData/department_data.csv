@@ -1,6 +1,6 @@
-DepartmentID,"""name""","""Head"""
-1,"""General Medicine""",5
-2,"""Surgery""",8
-3,"""Psychiatry""",14
-4,"""Radiology""",26
-5,"""Pharmacy""",30
+DepartmentID,name,Head
+1,General Medicine,5
+2,Surgery,8
+3,Psychiatry,14
+4,Radiology,26
+5,Pharmacy,30

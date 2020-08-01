@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import user.dao.PatientDao;
+import user.dao.QueriesDao;
 import user.domain.*;
 /**
  * Servlet implementation class patientServlet
@@ -21,6 +22,7 @@ public class patientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private PatientDao userDAO;
+	private QueriesDao headDAO;
 
     public void init() {
         userDAO = new PatientDao();
@@ -52,6 +54,10 @@ public class patientServlet extends HttpServlet {
                 case "/update":
                     updateUser(request, response);
                     break;
+                case "/deleteForm":
+                	showDeleteForm(request, response);
+                case "/HeadDept":
+                	showHead(request, response);
                 default:
                     listUser(request, response);
                     break;
@@ -74,13 +80,25 @@ public class patientServlet extends HttpServlet {
         for(int i=0;i<listUser.size();i++){
             System.out.println(listUser.get(i));
         } 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/PatientLists.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/Patient/PatientLists.jsp");
         dispatcher.forward(request, response);
     }
-
+    
+    private void showHead(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException, InstantiationException, IllegalAccessException, SQLException {
+    	List<head> listUser = headDAO.listAllHead();
+        
+        for(int i=0;i<listUser.size();i++){
+            System.out.println(listUser.get(i));
+        } 
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/Query/HeadQuery.jsp");
+        dispatcher.forward(request, response);
+    }   
+    
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/patientForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/Patient/patientForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -88,7 +106,7 @@ public class patientServlet extends HttpServlet {
     throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Patient existingUser = userDAO.getPatient(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/patientForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/Patient/patientForm.jsp");
         request.setAttribute("patient", existingUser);
         dispatcher.forward(request, response);
 
@@ -101,9 +119,10 @@ public class patientServlet extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
-        int phone = Integer.parseInt(request.getParameter("phone"));
+        String phone = request.getParameter("phone");
+        int physician = Integer.parseInt(request.getParameter("physician"));
         
-        Patient newPatient = new Patient(first, last, age, gender, address, phone);
+        Patient newPatient = new Patient(first, last, age, gender, address, phone, physician);
         userDAO.insertPatient(newPatient);
         response.sendRedirect("list");
     }
@@ -116,12 +135,25 @@ public class patientServlet extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
-        int phone = Integer.parseInt(request.getParameter("phone"));
-        Patient newPatient = new Patient(id, first, last, age, gender, address, phone);
+        String phone = request.getParameter("phone");
+        int physician = Integer.parseInt(request.getParameter("physician"));
+        
+        Patient newPatient = new Patient(id, first, last, age, gender, address, phone, physician);
         userDAO.updatePatient(newPatient);
         response.sendRedirect("list");
     }
+    
+    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, ServletException, IOException {
+	    int id = Integer.parseInt(request.getParameter("id"));
+	    System.out.println(id);
+	    Patient existingUser = userDAO.getPatient(id);
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/Patient/DeletePatient.jsp");
+	    request.setAttribute("patient", existingUser);
+	    dispatcher.forward(request, response);
 
+	}
+    
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, InstantiationException, IllegalAccessException {
         int id = Integer.parseInt(request.getParameter("id"));

@@ -1,4 +1,4 @@
-EmployeeID,first,last,position,"""ssn"""
+﻿EmployeeID,first,last,position,ssn
 1,John,Dorian,Internist,111
 2,Elliot,Redd,Attending Physician,222
 3,Missael,Garcia,Surgical Attending Physician,333

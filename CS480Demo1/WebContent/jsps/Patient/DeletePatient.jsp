@@ -9,26 +9,32 @@
     <center>
         <h1>Patient Management</h1>
         <h2>
-            <a href="<%=request.getContextPath()%>/new">Add New Patient</a>
+        	<a href="${pageContext.request.contextPath}/new">Add New Patient</a>
             &nbsp;&nbsp;&nbsp;
-            <a href="<%=request.getContextPath()%>/list">List All Patients</a>
+            <a href="${pageContext.request.contextPath}/list">List All Patient</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/jsps/main.jsp">Home</a>
              
         </h2>
     </center>
     <div align="center">
         <table border="1" cellpadding="5">
-            <caption><h2>Patient's Info</h2></caption>
+            <caption>
+            	<h1>Delete Patient</h1>
+            	<h2>Are you sure?</h2>
+            
+            </caption>
             <tr>
-                <th>ID</th>
+                <th>SSN</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Age</th>
                 <th>Gender</th>
                 <th>Address</th>
                 <th>Phone</th>
+                <th>Physician ID</th>
                 <th>Actions</th>
             </tr>
-            <c:forEach var="patient" items="${listPatients}">
                 <tr>
                     <td><c:out value="${patient.id}" /></td>
                     <td><c:out value="${patient.first}" /></td>
@@ -37,13 +43,11 @@
                     <td><c:out value="${patient.gender}" /></td>
                     <td><c:out value="${patient.address}" /></td>
                     <td><c:out value="${patient.phone}" /></td>
+                    <td><c:out value="${patient.physician}" /></td>
                     <td>
-                        <a href="<%=request.getContextPath()%>/edit?id=<c:out value='${patient.id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="<%=request.getContextPath()%>/delete?id=<c:out value='${patient.id}' />">Delete</a>                     
+                        <a href="${pageContext.request.contextPath}/delete?id=<c:out value='${patient.id}' />">Delete</a>                    
                     </td> 
                 </tr>
-            </c:forEach>
         </table>
     </div>   
 </body>

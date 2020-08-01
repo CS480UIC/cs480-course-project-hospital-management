@@ -19,7 +19,11 @@
     </center>
     <div align="center">
         <table border="1" cellpadding="5">
-            <caption><h2>Physician's Info</h2></caption>
+            <caption>
+            	<h1>Delete Physician</h1>
+            	<h2>Are you sure?</h2>
+            
+            </caption>
             <tr>
                 <th>ID</th>
                 <th>First Name</th>
@@ -28,7 +32,6 @@
                 <th>SSN</th>
                 <th>Actions</th>
             </tr>
-            <c:forEach var="physician" items="${listPhysicians}">
                 <tr>
                     <td><c:out value="${physician.id}" /></td>
                     <td><c:out value="${physician.first}" /></td>
@@ -36,12 +39,9 @@
                     <td><c:out value="${physician.position}" /></td>
                     <td><c:out value="${physician.ssn}" /></td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/physicianServlet?physiciannew=4&id=<c:out value='${physician.id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath}/physicianServlet?physiciannew=3&id=<c:out value='${physician.id}' />">Delete</a>                     
+                        <a href="${pageContext.request.contextPath}/physicianServlet?physiciannew=7&id=<c:out value='${physician.id}' />">Delete</a>                     
                     </td> 
                 </tr>
-            </c:forEach>
         </table>
     </div>   
 </body>

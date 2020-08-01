@@ -31,14 +31,45 @@ public class UserDao {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
+	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?serverTimezone=America/Chicago";
+
+	//  Database credentials
+	private static String USER = "root";
+	private static String PASS = "Cps40008713!";
+	private static Connection connect;
+	private PreparedStatement preparedStatement;
+	
+	public static void connectServer() throws InstantiationException, IllegalAccessException  {
+		
+		try {
+			//Register JDBC driver
+			Class.forName(JDBC_DRIVER);
+			
+			//Open a connection
+		    System.out.println("Connecting to database...");
+		    connect = DriverManager.getConnection(DB_URL, USER, PASS);
+		    
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	protected void disconnect() throws SQLException {
+		if(connect != null && !connect.isClosed()) {
+			connect.close();
+		}
+	}
+	
 	public User findByUsername(String username) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		User user = new User();
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connect = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/Hospital_Management?"
-							+ "user=root&password=Cps40008713!");
+			connectServer();
+		    
 		    String sql = "select * from tb_user where username=?";
 		    PreparedStatement preparestatement = connect.prepareStatement(sql); 
 		    preparestatement.setString(1,username);
@@ -53,6 +84,7 @@ public class UserDao {
 		    		
 		    	}
 		    }
+		    disconnect();
 		
 		    
 		} catch(SQLException e) {
@@ -73,10 +105,7 @@ public class UserDao {
 	 */
 	public void add(User user) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connect = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/Hospital_Management?"
-							+ "user=root&password=Cps40008713!");
+			connectServer();
 			
 			
 			String sql = "insert into tb_user values(?,?,?)";
@@ -85,6 +114,8 @@ public class UserDao {
 		    preparestatement.setString(2,user.getPassword());
 		    preparestatement.setString(3,user.getEmail());
 		    preparestatement.executeUpdate();
+		    
+		    disconnect();
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -94,10 +125,7 @@ public class UserDao {
 	public List<Object> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		List<Object> list = new ArrayList<>();
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connect = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/Hospital_Management?"
-							+ "user=root&password=Cps40008713!");
+			connectServer();
 			
 			
 			String sql = "select * from tb_user";
@@ -111,7 +139,8 @@ public class UserDao {
 	    		user.setEmail(resultSet.getString("email"));
 	    		list.add(user);
 			 }
-			 
+			disconnect(); 
+			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}

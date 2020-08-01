@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PhysicianDao {
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?";
+	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?serverTimezone=America/Chicago";
 
 	//  Database credentials
 	private static String USER = "root";
@@ -49,7 +49,7 @@ public class PhysicianDao {
 	}
 	
 	public boolean insertPhysician(Physician physician) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "INSERT INTO Physician (first, last, position, department_id) values (?, ?, ?, ?)";
+        String sql = "INSERT INTO Physician (first, last, position, ssn) values (?, ?, ?, ?)";
         connect();
         
         preparedStatement = jdbcconnect.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class PhysicianDao {
 		preparedStatement.setString(1, physician.getFirst());
 		preparedStatement.setString(2, physician.getLast());
 		preparedStatement.setString(3, physician.getPosition());
-		preparedStatement.setInt(4, physician.getDeptId());
+		preparedStatement.setInt(4, physician.getSsn());
          
         boolean rowInserted = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
@@ -76,14 +76,14 @@ public class PhysicianDao {
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-            int physician_id = resultSet.getInt("physician_id");
+            int physician_id = resultSet.getInt("EmployeeID");
             String first = resultSet.getString("first");
             String last = resultSet.getString("last");
             String position = resultSet.getString("position");
-            int deptId = resultSet.getInt("department_id");
+            int ssn = resultSet.getInt("ssn");
             
              
-            Physician physician = new Physician(physician_id, first, last, position, deptId);
+            Physician physician = new Physician(physician_id, first, last, position, ssn);
             listPhysician.add(physician);
         }
          
@@ -96,7 +96,7 @@ public class PhysicianDao {
     }
 	
 	public boolean deletePhysician(int id) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "DELETE FROM Physician WHERE physician_id=?";
+        String sql = "DELETE FROM Physician WHERE EmployeeID=?";
          
         connect();
          
@@ -110,7 +110,7 @@ public class PhysicianDao {
     }
 	
 	public boolean updatePhysician(Physician physician) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "UPDATE Physician SET first=?, last=?, position=?, department_id=? WHERE physician_id=?";
+        String sql = "UPDATE Physician SET first=?, last=?, position=?, ssn=? WHERE EmployeeID=?";
         
         connect();
          
@@ -118,7 +118,7 @@ public class PhysicianDao {
         statement.setString(1, physician.getFirst());
         statement.setString(2, physician.getLast());
         statement.setString(3, physician.getPosition());
-        statement.setInt(4, physician.getDeptId());
+        statement.setInt(4, physician.getSsn());
         statement.setInt(5, physician.getId());
          
         boolean rowUpdated = statement.executeUpdate() > 0;
@@ -129,7 +129,7 @@ public class PhysicianDao {
 	
 	public Physician getPhysician(int id) throws SQLException {
 		Physician physician = null;
-        String sql = "SELECT * FROM Physician WHERE physician_id=?";
+        String sql = "SELECT * FROM Physician WHERE EmployeeID=?";
          
         try {
 			connect();
@@ -150,9 +150,9 @@ public class PhysicianDao {
             String first = resultSet.getString("first");
             String last = resultSet.getString("last");
             String position = resultSet.getString("position");
-            int deptId = resultSet.getInt("department_id");
+            int ssn = resultSet.getInt("ssn");
              
-            physician = new Physician(id, first, last, position, deptId);
+            physician = new Physician(id, first, last, position, ssn);
         }
          
         resultSet.close();

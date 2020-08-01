@@ -19,7 +19,11 @@
     </center>
     <div align="center">
         <table border="1" cellpadding="5">
-            <caption><h2> Nurse's Info</h2></caption>
+            <caption>
+            	<h1>Delete Nurse</h1>
+            	<h2>Are you sure?</h2>
+            
+            </caption>
             <tr>
                 <th>ID</th>
                 <th>First Name</th>
@@ -27,19 +31,15 @@
                 <th>Position</th>
                 <th>Actions</th>
             </tr>
-            <c:forEach var="nurse" items="${listNurses}">
                 <tr>
                     <td><c:out value="${nurse.id}" /></td>
                     <td><c:out value="${nurse.first}" /></td>
                     <td><c:out value="${nurse.last}" /></td>
                     <td><c:out value="${nurse.position}" /></td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/nurseServlet?nursing=4&id=<c:out value='${nurse.id}' />">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="${pageContext.request.contextPath}/nurseServlet?nursing=7&id=<c:out value='${nurse.id}' />">Delete</a>                     
+                        <a href="${pageContext.request.contextPath}/nurseServlet?nursing=3&id=<c:out value='${nurse.id}' />">Delete</a>                     
                     </td> 
                 </tr>
-            </c:forEach>
         </table>
     </div>   
 </body>

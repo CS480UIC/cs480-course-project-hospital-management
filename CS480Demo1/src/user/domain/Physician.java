@@ -5,7 +5,7 @@ public class Physician {
 	protected String first;
 	protected String last;
 	protected String position;
-	protected int dept_id;
+	protected int ssn;
 	
 	
 	public Physician() {}
@@ -14,18 +14,18 @@ public class Physician {
 		physician_id = id;
 	}
 	
-	public Physician(int id, String first, String last, String position, int dept_id) {
+	public Physician(int id, String first, String last, String position, int ssn) {
 		physician_id  = id;
 		this.first  = first;
 		this.last = last;
 		this.position = position;
-		this.dept_id  = dept_id;
+		this.ssn  = ssn;
 	}
-	public Physician(String first, String last, String position, int dept_id) {
+	public Physician(String first, String last, String position, int ssn) {
 		this.first  = first;
 		this.last = last;
 		this.position = position;
-		this.dept_id  = dept_id;
+		this.ssn  = ssn;
 	}
 	
 	public int getId() {
@@ -54,11 +54,11 @@ public class Physician {
     public void setPosition(String position) {
         this.position  = position;
     }
-    public int getDeptId() {
-        return dept_id;
+    public int getSsn() {
+        return ssn;
     }
-    public void setDeptId(int d_id) {
-    	dept_id = d_id;
+    public void setSsn(int ssn) {
+    	this.ssn = ssn;
     }
 	
 

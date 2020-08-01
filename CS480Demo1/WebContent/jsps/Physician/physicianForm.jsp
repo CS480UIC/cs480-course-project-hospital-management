@@ -13,6 +13,8 @@
             <a href="${pageContext.request.contextPath}/physicianServlet?physiciannew=1">Add New Physician</a>
             &nbsp;&nbsp;&nbsp;
             <a href="${pageContext.request.contextPath}/physicianServlet?physiciannew=6">List All Physician</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/jsps/main.jsp">Home</a>
              
         </h2>
     </center>
@@ -62,10 +64,10 @@
                 </td>
             </tr>
             <tr>
-                <th>Department: </th>
+                <th>SSN: </th>
                 <td>
-                    <input type="text" name="deptId" size="45"
-                            value="<c:out value='${physician.deptId}' />"
+                    <input type="text" name="ssn" size="45"
+                            value="<c:out value='${physician.ssn}' />"
                         />
                 </td>
             </tr>

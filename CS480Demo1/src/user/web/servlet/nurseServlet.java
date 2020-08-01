@@ -58,6 +58,8 @@ public class nurseServlet extends HttpServlet {
                 case 5:
                     updateUser(request, response);
                     break;
+                case 7:
+                	showDeleteForm(request, response);
                 default:
                     listUser(request, response);
                     break;
@@ -126,6 +128,16 @@ public class nurseServlet extends HttpServlet {
         Nurse newNurse = new Nurse(id, first, last, position);
         userDAO.updateNurse(newNurse);
         response.sendRedirect("nurseServlet?nursing=6");
+    }
+    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, ServletException, IOException {
+    	int id = Integer.parseInt(request.getParameter("id"));
+    	System.out.println(id);
+    	Nurse existingUser = userDAO.getNurse(id);
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/jsps/Nurse/DeleteNurse.jsp");
+    	request.setAttribute("nurse", existingUser);
+    	dispatcher.forward(request, response);
+
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)

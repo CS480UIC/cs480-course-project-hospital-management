@@ -12,7 +12,7 @@ import java.util.List;
 
 public class NurseDao {
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?";
+	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?serverTimezone=America/Chicago";
 
 	//  Database credentials
 	private static String USER = "root";
@@ -75,7 +75,7 @@ public class NurseDao {
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-            int nurse_id = resultSet.getInt("nurse_id");
+            int nurse_id = resultSet.getInt("EmployeeID");
             String first = resultSet.getString("first");
             String last = resultSet.getString("last");
             String position = resultSet.getString("position");
@@ -94,7 +94,7 @@ public class NurseDao {
     }
 	
 	public boolean deleteNurse(int id) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "DELETE FROM Nurse WHERE nurse_id=?";
+        String sql = "DELETE FROM Nurse WHERE EmployeeID=?";
          
         connect();
          
@@ -108,7 +108,7 @@ public class NurseDao {
     }
 	
 	public boolean updateNurse(Nurse nurse) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "UPDATE Nurse SET first=?, last=?, position=? WHERE nurse_id=?";
+        String sql = "UPDATE Nurse SET first=?, last=?, position=? WHERE EmployeeID=?";
         
         connect();
          
@@ -126,7 +126,7 @@ public class NurseDao {
 	
 	public Nurse getNurse(int id) throws SQLException {
 		Nurse nurse = null;
-        String sql = "SELECT * FROM Nurse WHERE nurse_id=?";
+        String sql = "SELECT * FROM Nurse WHERE EmployeeID=?";
          
         try {
 			connect();

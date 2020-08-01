@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PatientDao {
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?";
+	private static String DB_URL = "jdbc:mysql://localhost/Hospital_Management?serverTimezone=America/Chicago";
 
 	//  Database credentials
 	private static String USER = "root";
@@ -49,7 +49,7 @@ public class PatientDao {
 	}
 	
 	public boolean insertPatient(Patient patient) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "INSERT INTO Patient (first, last, age, gender, address, phone) values (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Patient (first, last, age, gender, address, phone, physician) values (?, ?, ?, ?, ?, ?, ?)";
         connect();
         
         preparedStatement = jdbcconnect.prepareStatement(sql);
@@ -59,7 +59,8 @@ public class PatientDao {
 		preparedStatement.setInt(3, patient.getAge());
 		preparedStatement.setString(4, patient.getGender());
 		preparedStatement.setString(5, patient.getAddress());
-		preparedStatement.setInt(6, patient.getPhone());
+		preparedStatement.setString(6, patient.getPhone());
+		preparedStatement.setInt(7, patient.getPhysician());
          
         boolean rowInserted = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
@@ -78,16 +79,17 @@ public class PatientDao {
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-            int patient_id = resultSet.getInt("patient_id");
+            int patient_id = resultSet.getInt("SSN");
             String first = resultSet.getString("first");
             String last = resultSet.getString("last");
             int age = resultSet.getInt("age");
             String gender = resultSet.getString("gender");
             String address = resultSet.getString("address");
-            int phone = resultSet.getInt("phone");
+            String phone = resultSet.getString("phone");
+            int physician = resultSet.getInt("physician");
             
              
-            Patient patient = new Patient(patient_id, first, last, age, gender, address, phone);
+            Patient patient = new Patient(patient_id, first, last, age, gender, address, phone, physician);
             listPatient.add(patient);
         }
          
@@ -100,7 +102,7 @@ public class PatientDao {
     }
 	
 	public boolean deletePatient(int id) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "DELETE FROM Patient where patient_id = ?";
+        String sql = "DELETE FROM Patient where SSN = ?";
          
         connect();
          
@@ -114,7 +116,7 @@ public class PatientDao {
     }
 	
 	public boolean updatePatient(Patient patient) throws SQLException, InstantiationException, IllegalAccessException {
-        String sql = "UPDATE Patient SET first=?, last=?, age=?, gender=?, address=?, phone=? WHERE patient_id=?";
+        String sql = "UPDATE Patient SET first=?, last=?, age=?, gender=?, address=?, phone=?, physician=? WHERE SSN=?";
         
         connect();
          
@@ -124,8 +126,9 @@ public class PatientDao {
         statement.setInt(3, patient.getAge());
         statement.setString(4, patient.getGender());
         statement.setString(5, patient.getAddress());
-        statement.setInt(6, patient.getPhone());
-        statement.setInt(7, patient.getId());
+        statement.setString(6, patient.getPhone());
+        statement.setInt(7, patient.getPhysician());
+        statement.setInt(8, patient.getId());
          
         boolean rowUpdated = statement.executeUpdate() > 0;
         statement.close();
@@ -135,7 +138,7 @@ public class PatientDao {
 	
 	public Patient getPatient(int id) throws SQLException {
         Patient patient = null;
-        String sql = "SELECT * FROM Patient WHERE patient_id = ?";
+        String sql = "SELECT * FROM Patient WHERE SSN = ?";
          
         try {
 			connect();
@@ -158,9 +161,10 @@ public class PatientDao {
             int age = resultSet.getInt("age");
             String gender = resultSet.getString("gender");
             String address = resultSet.getString("address");
-            int phone = resultSet.getInt("phone");
+            String phone = resultSet.getString("phone");
+            int physician = resultSet.getInt("physician");
              
-            patient = new Patient(id, first, last, age, gender, address, phone);
+            patient = new Patient(id, first, last, age, gender, address, phone, physician);
         }
          
         resultSet.close();

@@ -13,6 +13,8 @@
             <a href="<%=request.getContextPath()%>/new">Add New Patient</a>
             &nbsp;&nbsp;&nbsp;
             <a href="<%=request.getContextPath()%>/list">List All Patients</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/jsps/main.jsp">Home</a>
              
         </h2>
     </center>
@@ -82,6 +84,14 @@
                 <td>
                     <input type="text" name="phone" size="45"
                             value="<c:out value='${patient.phone}' />"
+                    />
+                </td>
+            </tr>
+            <tr>
+                <th>Physician: </th>
+                <td>
+                    <input type="text" name="physician" size="45"
+                            value="<c:out value='${patient.physician}' />"
                     />
                 </td>
             </tr>

@@ -7,7 +7,8 @@ public class Patient {
 	protected int age;
 	protected String gender;
 	protected String address;
-	protected int phone;
+	protected String phone;
+	protected int physician;
 	
 	/* Constructor */
 	public Patient() {}
@@ -16,7 +17,7 @@ public class Patient {
 		patient_id = id;
 	}
 	
-	public Patient(int id, String first, String last, int age, String gender, String address, int phone) {
+	public Patient(int id, String first, String last, int age, String gender, String address, String phone, int physician) {
 		patient_id = id;
 		this.first = first;
 		this.address = address;
@@ -24,14 +25,16 @@ public class Patient {
 		this.age = age;
 		this.gender = gender;
 		this.phone = phone;
+		this.physician = physician;
 	}
-	public Patient(String first, String last, int age, String gender, String address, int phone) {
+	public Patient(String first, String last, int age, String gender, String address, String phone, int physician) {
 		this.first = first;
 		this.address = address;
 		this.last = last;
 		this.age = age;
 		this.gender = gender;
 		this.phone = phone;
+		this.physician = physician;
 		
 	}
 	
@@ -63,10 +66,10 @@ public class Patient {
         this.age = age;
     }
   
-    public int getPhone() {
+    public String getPhone() {
     	return phone;
     }
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     
@@ -82,6 +85,13 @@ public class Patient {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public int getPhysician() {
+		return physician;
+	}
+	public void setPhysician(int physician) {
+		this.physician = physician;
 	}
 	
 

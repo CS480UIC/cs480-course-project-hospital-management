@@ -38,9 +38,17 @@
 			<a href="<c:url value='/jsps/user/login.jsp'/>" target="_parent">Login</a> |&nbsp; 
 			<a href="<c:url value='/jsps/user/regist.jsp'/>" target="_parent">Register</a> |&nbsp;
 			<a href="<c:url value='/jsps/user/initialize.jsp'/>" target="_parent">Initialize Database</a> |&nbsp;
-			<a href="<c:url value='/jsps/PatientLists.jsp'/>" target="_parent">Patients</a> |&nbsp;
+			<a href="<c:url value='/jsps/Patient/PatientLists.jsp'/>" target="_parent">Patients</a> |&nbsp;
 			<a href="<c:url value='/jsps/Physician/physicianList.jsp'/>" target="_parent">Physician</a> |&nbsp;
-			<a href="<c:url value='/jsps/Nurse/nurseList.jsp'/>" target="_parent">Nurse</a>
+			<a href="<c:url value='/jsps/Nurse/nurseList.jsp'/>" target="_parent">Nurse</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/HeadQuery.jsp'/>" target="_parent">Head Physicians</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/DepartmentPhysicianList.jsp'/>" target="_parent">Department and Physicians</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/PatientVisits.jsp'/>" target="_parent">Frequent Patients</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/PatientDoctorList.jsp'/>" target="_parent">Patient w/ More Physicians</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/SpecificAppointment.jsp'/>" target="_parent">Specific Appointments</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/AppointmentNoNurse.jsp'/>" target="_parent">Appointments w/ No Nurse</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/NonHeadAppointment.jsp'/>" target="_parent">Appointments Non-Head</a> |&nbsp;
+			<a href="<c:url value='/jsps/Query/PCPAppointment.jsp'/>" target="_parent">Primary Physician Appointment</a>
 		
 		</c:when>
 		<c:otherwise>
