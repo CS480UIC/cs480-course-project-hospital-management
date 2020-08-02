@@ -27,7 +27,7 @@ public class InitializeDao {
 	public void initDB() throws InstantiationException, IllegalAccessException  {
 		// JDBC driver name and database URL
 		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-		final String DB_URL = "jdbc:mysql://localhost/";
+		final String DB_URL = "jdbc:mysql://localhost/?serverTimezone=America/Chicago";
 
 		//  Database credentials
 		final String USER = "root";
